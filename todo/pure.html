@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        display: none;
+    }
+    </style>
+<body>
+    <div class="box">Hello</div>
+    <button id="show">Show</button>
+</body>
+<script>
+//  var box = document.querySelector('.box');
+// var button = document.querySelector('#show');
+// button.addEventListener('click', function() {
+//     if (box.style.display === 'none') {
+//         box.style.display = 'block';
+//     } else {
+//         box.style.display = 'none';
+//     }
+
+    $('#show').click(function() {
+        $('.box').toggle();
+    });
+
+   </script>
+</html>

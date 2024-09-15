@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+
+    <input type="text" id="leftOperand" placeholder="Enter left number">
+    
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+
+    <input type="text" id="rightOperand" placeholder="Enter right number">
+
+    <button id="tryMeButton">Try me!</button>
+
+    <script>
+    $(document).ready(function() {
+        $('#tryMeButton').on('click', function() {
+            const leftOperand = $('#leftOperand').val();
+            const rightOperand = $('#rightOperand').val();
+            const operator = $('#operator').val();
+
+            // Validate that both inputs are numeric only
+            const isValidNumber = (value) => /^-?\d+(\.\d+)?$/.test(value);
+
+            if (!isValidNumber(leftOperand) || !isValidNumber(rightOperand)) {
+                alert('Error :(.');
+                console.error('Error: Invalid input (non-numeric values)');
+                return;
+            }
+
+            // Convert valid inputs to float
+            const leftNumber = parseFloat(leftOperand);
+            const rightNumber = parseFloat(rightOperand);
+          if (leftNumber < 0 || rightNumber < 0) {
+                alert('Error :(.');
+                console.error('Error: Invalid input (negative values)');
+                return;
+            }
+            let result;
+
+            switch (operator) {
+                case '+':
+                    result = leftNumber + rightNumber;
+                    break;
+                case '-':
+                    result = leftNumber - rightNumber;
+                    break;
+                case '*':
+                    result = leftNumber * rightNumber;
+                    break;
+                case '/':
+                    if (rightNumber === 0) {
+                        alert("Error: Division by zero is not allowed.");
+                        console.error("Error: Division by zero");
+                        return;
+                    }
+                    result = leftNumber / rightNumber;
+                    break;
+                case '%':
+                    if (rightNumber === 0) {
+                        alert("Error: Modulo by zero is not allowed.");
+                        console.error("Error: Modulo by zero");
+                        return;
+                    }
+                    result = leftNumber % rightNumber;
+                    break;
+                default:
+                    alert('Error: Invalid operation');
+                    console.error('Error: Invalid operation');
+                    return;
+            }
+
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
+        });
+
+        // Show an alert every 30 seconds
+        setInterval(function() {
+            alert('Please, use me...');
+        }, 30000);
+    });
+    </script>
+</body>
+</html>

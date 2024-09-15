@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explode the Balloon</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #balloon {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+  </style>
+  <!-- Include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="balloon"></div>
+
+  <script>
+    $(document).ready(function() {
+      const $balloon = $('#balloon');
+      let size = 200;
+      const colors = ['red', 'green', 'blue'];
+      let colorIndex = 0;
+
+      // On click: increase the size and change color
+      $balloon.on('click', function() {
+        size += 10;
+        colorIndex = (colorIndex + 1) % colors.length;
+        $balloon.css({
+          'width': `${size}px`,
+          'height': `${size}px`,
+          'background-color': colors[colorIndex]
+        });
+
+        // Reset to original size if balloon size exceeds 420px
+        if (size > 420) {
+          size = 200;
+          $balloon.css({
+            'width': `${size}px`,
+            'height': `${size}px`,
+            'background-color': 'red'
+          })
+        }
+        if (size < 200) {
+          size = 200;
+          $balloon.css({
+            'width': `${size}px`,
+            'height': `${size}px`,
+            'background-color': 'red'
+          });
+        }
+      });
+
+      // On mouseover: decrease size and reverse color order
+     
+
+      // On mouseleave: reset the balloon to its original size and color
+      $balloon.on('mouseleave', function() {
+        size -=5;
+        colorIndex-=1
+        if (colorIndex < 0) {
+          colorIndex = 2;
+        }
+      
+        
+        $balloon.css({
+          'width': `${size}px`,
+          'height': `${size}px`,
+          'background-color': colors[colorIndex]
+        });
+        console.log(colorIndex)
+        
+        if (size < 200) {
+          size = 200;
+          $balloon.css({
+            'width': `${size}px`,
+            'height': `${size}px`,
+            'background-color': 'red'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
